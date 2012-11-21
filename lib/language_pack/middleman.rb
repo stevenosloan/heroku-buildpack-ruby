@@ -34,9 +34,9 @@ class LanguagePack::Middleman < LanguagePack::Ruby
 
   def compile
     super
-    allow_git do
-      run_middleman_build_process
-    end
+    # allow_git do
+    #   run_middleman_build_process
+    # end
   end
 
 private
