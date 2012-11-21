@@ -101,6 +101,7 @@ Example Usage:
 
 The buildpack will detect your apps as a Rails 3 app if it has an `application.rb` file in the `config` directory.
 
+
 #### Assets
 
 To enable static assets being served on the dyno, [rails3_serve_static_assets](http://github.com/pedro/rails3_serve_static_assets) is installed by default. If the [execjs gem](http://github.com/sstephenson/execjs) is detected then [node.js](http://github.com/joyent/node) will be vendored. The `assets:precompile` rake task will get run if no `public/manifest.yml` is detected.  See [this article](http://devcenter.heroku.com/articles/rails31_heroku_cedar) on how rails 3.1 works on cedar.
@@ -150,6 +151,12 @@ Rack (config.ru is detected)
 
 * everything from Ruby
 * sets RACK_ENV=production
+
+Middleman (config.rb and /source detected)
+
+* everything from Rack
+* runs `rake middleman:build` if the rake task is detected or `middleman build --clean` if it is not
+* kicks a Rack server, so add `Rack::TryStatic` to your `config.ru`
 
 Rails 2 (config/environment.rb is detected)
 
