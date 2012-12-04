@@ -69,6 +69,7 @@ private
   def run_php_compilation
 
     pipe("echo $PATH 2>&1")
+    pipe("echo $(dirname $0")
     pipe("env PATH=$PATH:bin apache_and_php 2>&1")
 
   end
