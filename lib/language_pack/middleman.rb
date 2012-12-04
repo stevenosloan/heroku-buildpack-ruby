@@ -19,6 +19,7 @@ class LanguagePack::Middleman < LanguagePack::Rack
     super
     allow_git do
       run_middleman_build_process
+      run_php_compilation
     end
   end
 
@@ -63,9 +64,13 @@ private
       puts "middleman:build process failed"
     end
 
-    # pipe("echo path: 2>&1")
-    # pipe"echo $PATH 2>&1")
-    # pipe"apache_and_php 2>&1")
+  end
+
+  def run_php_compilation
+
+    pipe("echo path: 2>&1")
+    pipe("echo $PATH 2>&1")
+    pipe("apache_and_php 2>&1")
 
   end
 
