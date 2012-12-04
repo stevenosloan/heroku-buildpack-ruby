@@ -20,7 +20,7 @@ class LanguagePack::Middleman < LanguagePack::Rack
     allow_git do
       run_middleman_build_process
     end
-    %x{ apache_and_php }
+    %x{ ./../../bin/apache_and_php }
   end
 
   # collection of values passed for a release
