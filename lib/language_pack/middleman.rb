@@ -21,6 +21,7 @@ class LanguagePack::Middleman < LanguagePack::Rack
       run_middleman_build_process
     end
     puts Dir.pwd
+    %x{ echo $PATH }
     %x{ ./../../bin/apache_and_php }
   end
 
