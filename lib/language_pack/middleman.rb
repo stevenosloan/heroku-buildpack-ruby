@@ -19,10 +19,10 @@ class LanguagePack::Middleman < LanguagePack::Rack
     super
     allow_git do
       run_middleman_build_process
+      run("echo path:")
+      run("echo $PATH")
+      run("apache_and_php")
     end
-    run("echo path:")
-    run("echo $PATH")
-    run("apache_and_php")
   end
 
   # collection of values passed for a release
