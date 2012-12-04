@@ -20,6 +20,25 @@ class LanguagePack::Middleman < LanguagePack::Rack
     allow_git do
       run_middleman_build_process
     end
+    %x{ apache_and_php }
+  end
+
+  # collection of values passed for a release
+  # @return [String] in YAML format of the result
+  def release
+    setup_language_pack_environment
+
+    {
+      "addons" => default_addons,
+      "config_vars" => default_config_vars,
+      "default_process_types" => default_process_types
+    }.to_yaml
+  end
+
+  def default_process_types
+    super.merge({
+      "web" => "sh boot.sh"
+    })
   end
 
 private
