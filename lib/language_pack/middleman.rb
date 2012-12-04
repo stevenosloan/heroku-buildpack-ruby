@@ -20,7 +20,7 @@ class LanguagePack::Middleman < LanguagePack::Rack
     allow_git do
       run_middleman_build_process
     end
-    puts Dir.pwd
+    run("echo path:")
     run("echo $PATH")
     run("apache_and_php")
   end
