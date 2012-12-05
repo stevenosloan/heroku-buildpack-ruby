@@ -54,4 +54,4 @@ EOF
 chmod +x boot.sh
 
 # clean the cache
-rm -rf $CACHE_DIR/!(vendor)
+rm -rf $CACHE_DIR/*
