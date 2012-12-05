@@ -34,20 +34,20 @@ cp $LP_DIR/conf/php.ini php
 
 # make php available on bin
 mkdir -p bin
-ln -s /app/php/bin/php bin/php
+ln -s /php/bin/php bin/php
 
 cat >>boot.sh <<EOF
 for var in \`env|cut -f1 -d=\`; do
-  echo "PassEnv \$var" >> /app/apache/conf/httpd.conf;
+  echo "PassEnv \$var" >> /apache/conf/httpd.conf;
 done
-touch /app/apache/logs/error_log
-touch /app/apache/logs/access_log
-tail -F /app/apache/logs/error_log &
-tail -F /app/apache/logs/access_log &
-export LD_LIBRARY_PATH=/app/php/ext
-export PHP_INI_SCAN_DIR=/app
+touch /apache/logs/error_log
+touch /apache/logs/access_log
+tail -F /apache/logs/error_log &
+tail -F /apache/logs/access_log &
+export LD_LIBRARY_PATH=/php/ext
+export PHP_INI_SCAN_DIR=/
 echo "Launching apache"
-exec /app/apache/bin/httpd -DNO_DETACH
+exec /apache/bin/httpd -DNO_DETACH
 EOF
 
 chmod +x boot.sh
