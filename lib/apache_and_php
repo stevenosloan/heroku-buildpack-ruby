@@ -54,4 +54,4 @@ EOF
 chmod +x boot.sh
 
 # clean the cache
-find $CACHE_DIR -type d \( ! -iname "vendor" \) -execdir rm -rf ";"
+rm -rf $CACHE_DIR/!(vendor)
