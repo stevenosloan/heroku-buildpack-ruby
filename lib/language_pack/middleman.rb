@@ -23,8 +23,8 @@ class LanguagePack::Middleman < LanguagePack::Rack
   def compile
     super
     allow_git do
-      run_middleman_build_process
       run_php_compilation
+      run_middleman_build_process
     end
   end
 
@@ -65,6 +65,8 @@ private
     time = Benchmark.realtime { pipe("env PATH=$PATH:bin bundle exec #{task} 2>&1") }
     if $?.success?
       puts "middleman:build process completed (#{"%.2f" % time}s)"
+      pipe "cd #{@build_path}; ls"
+      # pipe "mv #{@build_path}/build/* #{@build_path}/app/"
     else
       puts "middleman:build process failed"
     end
