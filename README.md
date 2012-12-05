@@ -13,7 +13,7 @@ Example Usage:
     $ ls
     Gemfile Gemfile.lock
 
-    $ heroku create --stack cedar --buildpack https://github.com/heroku/heroku-buildpack-ruby.git
+    $ heroku create --stack cedar --buildpack https://github.com/stevenosloan/heroku-buildpack-ruby.git
 
     $ git push heroku master
     ...
@@ -37,6 +37,31 @@ The buildpack will detect your app as Ruby if it has a `Gemfile` and `Gemfile.lo
 
 For non-windows `Gemfile.lock` files, the `--deployment` flag will be used. In the case of windows, the Gemfile.lock will be deleted and Bundler will do a full resolve so native gems are handled properly. The `vendor/bundle` directory is cached between builds to allow for faster `bundle install` times. `bundle clean` is used to ensure no stale gems are stored between builds.
 
+### Middleman ###
+
+Example Usage:
+
+    $ ls
+    config.rb source/
+
+    $ heroku create --stack cedar --buildpack https://github.com/stevenosloan/heroku-buildpack-ruby.git
+
+    $ git push heroku master
+    ...
+    -----> Heroku receiving push
+    -----> Fetching custom git buildpack... done
+    -----> Ruby/Middleman app detected
+    -----> Installing dependencies using Bundler version 1.2.1
+    -----> Bundling Apache & PHP
+    -----> Running: rake middleman:build
+    -----> Discovering process types
+           Procfile declares types          -> (none)
+           Default types for Ruby/Middleman -> console, rake, web
+
+The buildpack will detect your app as a middleman site if it has a `config.rb` and a `source/` folder in the root directory.
+
+It proceeds to run `rake middleman:build` if the task exists, or `bundle exec middleman build --clean` if it does not. Once the site is build it is served with Apache and PHP out of the `/build` directory.
+
 ### Rails 2
 
 Example Usage:
@@ -47,7 +72,7 @@ Example Usage:
     $ ls config/environment.rb
     config/environment.rb
 
-    $ heroku create --stack cedar --buildpack https://github.com/heroku/heroku-buildpack-ruby.git
+    $ heroku create --stack cedar --buildpack https://github.com/stevenosloan/heroku-buildpack-ruby.git
 
     $ git push heroku master
     ...
@@ -81,7 +106,7 @@ Example Usage:
     $ ls config/application.rb
     config/application.rb
 
-    $ heroku create --stack cedar --buildpack https://github.com/heroku/heroku-buildpack-ruby.git
+    $ heroku create --stack cedar --buildpack https://github.com/stevenosloan/heroku-buildpack-ruby.git
 
     $ git push heroku master
     -----> Heroku receiving push
@@ -156,7 +181,7 @@ Middleman (config.rb and /source detected)
 
 * everything from Rack
 * runs `rake middleman:build` if the rake task is detected or `middleman build --clean` if it is not
-* kicks a Rack server, so add `Rack::TryStatic` to your `config.ru`
+* serves the site out of `/build` with Apache and PHP
 
 Rails 2 (config/environment.rb is detected)
 
