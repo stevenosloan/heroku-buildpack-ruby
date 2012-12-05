@@ -69,8 +69,8 @@ private
   def run_php_compilation
 
     pipe("echo $PATH 2>&1")
-    pipe("echo $(dirname $0)")
-    pipe("cd $(dirname $0); cd ../lib/apache_and_php 2>&1")
+    pipe("echo #{@build_path}")
+    pipe("#{@build_path}/lib/apache_and_php 2>&1")
 
   end
 
