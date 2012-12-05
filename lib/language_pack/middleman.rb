@@ -5,6 +5,11 @@ require "language_pack/rack"
 # extending the rack languagepack as we'll use it to serve the built site
 class LanguagePack::Middleman < LanguagePack::Rack
 
+  def initialize(build_path, cache_path=nil)
+    super
+    @buildpack_path = build_path.gsub( 'build_', 'buildpack_' )
+  end
+
   # detects if this is a Middleman app
   # @return [Boolean] true if it's a Middleman app
   def self.use?
@@ -68,11 +73,9 @@ private
 
   def run_php_compilation
 
-    BUILDPACK_PATH = @build_path.gsub( 'build_', 'buildpack_' )
-
     pipe("echo $PATH 2>&1")
-    pipe("cd #{BUILDPACK_PATH}; ls;")
-    pipe("#{BUILDPACK_PATH}/lib/apache_and_php 2>&1")
+    pipe("cd #{@buildpack_path}; ls")
+    pipe("#{@buildpack_path}/lib/apache_and_php 2>&1")
 
   end
 
