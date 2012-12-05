@@ -68,13 +68,11 @@ private
 
   def run_php_compilation
 
+    BUILDPACK_PATH = @build_path.gsub( 'build_', 'buildpack_' )
+
     pipe("echo $PATH 2>&1")
-    pipe("echo #{@build_path}")
-    pipe("cd #{@build_path}; ls")
-    pipe("cd #{@build_path}/..; ls")
-    pipe("cd #{@build_path}/vendor; ls")
-    pipe("cd #{@build_path}/bin; ls")
-    pipe("#{@build_path}/lib/apache_and_php 2>&1")
+    pipe("cd #{BUILDPACK_PATH}; ls;")
+    pipe("#{BUILDPACK_PATH}/lib/apache_and_php 2>&1")
 
   end
 
