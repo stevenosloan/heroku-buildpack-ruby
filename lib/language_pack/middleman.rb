@@ -71,6 +71,9 @@ private
     pipe("echo $PATH 2>&1")
     pipe("echo #{@build_path}")
     pipe("cd #{@build_path}; ls")
+    pipe("cd #{@build_path}/..; ls")
+    pipe("cd #{@build_path}/vendor; ls")
+    pipe("cd #{@build_path}/bin; ls")
     pipe("#{@build_path}/lib/apache_and_php 2>&1")
 
   end
