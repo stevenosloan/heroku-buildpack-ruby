@@ -70,6 +70,7 @@ private
 
     pipe("echo $PATH 2>&1")
     pipe("echo #{@build_path}")
+    pipe("cd #{@build_path}; ls")
     pipe("#{@build_path}/lib/apache_and_php 2>&1")
 
   end
