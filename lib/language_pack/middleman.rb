@@ -70,7 +70,7 @@ private
 
     pipe("echo $PATH 2>&1")
     pipe("echo $(dirname $0)")
-    pipe("./apache_and_php 2>&1")
+    pipe("cd $(dirname $0); cd ../lib/apache_and_php 2>&1")
 
   end
 
