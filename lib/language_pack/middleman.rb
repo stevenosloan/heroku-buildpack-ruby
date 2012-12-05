@@ -73,7 +73,7 @@ private
 
   def run_php_compilation
 
-    topic "Building Apache & PHP"
+    topic "Bundling Apache & PHP"
     pipe("chmod +x #{@buildpack_path}/lib/apache_and_php 2>&1")
     pipe("#{@buildpack_path}/lib/apache_and_php #{@build_path} #{@cache_path} 2>&1")\
 
