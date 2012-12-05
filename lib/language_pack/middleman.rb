@@ -65,7 +65,6 @@ private
     time = Benchmark.realtime { pipe("env PATH=$PATH:bin bundle exec #{task} 2>&1") }
     if $?.success?
       puts "middleman:build process completed (#{"%.2f" % time}s)"
-      pipe "cd #{@build_path}; ls"
       # pipe "mv #{@build_path}/build/* #{@build_path}/app/"
     else
       puts "middleman:build process failed"
@@ -77,8 +76,10 @@ private
 
     pipe("echo $PATH 2>&1")
     pipe("cd #{@buildpack_path}; ls -al")
+    pipe("cd #{@build_path}; ls -al")
     pipe("chmod +x #{@buildpack_path}/lib/apache_and_php 2>&1")
     pipe("#{@buildpack_path}/lib/apache_and_php #{@build_path} #{@cache_path} 2>&1")
+    pipe("cd #{@build_path}; ls -al")
 
   end
 
