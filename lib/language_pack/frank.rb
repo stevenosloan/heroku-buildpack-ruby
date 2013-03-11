@@ -1,17 +1,17 @@
 require "language_pack"
 require "language_pack/rack"
 
-# Middleman Language Pack. Use to generate a middleman site on heroku
+# Frank Language Pack. Use to generate a frank site on heroku
 # extending the rack languagepack as we'll use it to serve the built site
-class LanguagePack::Middleman < LanguagePack::Rack
+class LanguagePack::Frank < LanguagePack::Rack
 
   def initialize(build_path, cache_path=nil)
     super
     @buildpack_path = build_path.gsub( 'build_', 'buildpack_' )
   end
 
-  # detects if this is a Middleman app
-  # @return [Boolean] true if it's a Middleman app
+  # detects if this is a Frank app
+  # @return [Boolean] true if it's a Frank app
   def self.use?
     File.exist?("setup.rb") && File.directory?('dynamic')
   end
@@ -48,9 +48,9 @@ class LanguagePack::Middleman < LanguagePack::Rack
 
 private
 
-  # check if a middleman:build rake task exists
-  # or run the default middleman build
-  def run_middleman_build_process
+  # check if a frank:build rake task exists
+  # or run the default frank build
+  def run_frank_build_process
 
     if rake_task_defined?("frank:build")
       task = "rake frank:build"
