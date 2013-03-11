@@ -8,8 +8,8 @@ module LanguagePack
   # @return [LanguagePack] the {LanguagePack} detected
   def self.detect(*args)
     Dir.chdir(args.first)
-    
-    pack = [ Rails3, Rails2, Middleman, Rack, Ruby ].detect do |klass|
+
+    pack = [ Rails3, Rails2, Middleman, Frank, Rack, Ruby ].detect do |klass|
       klass.use?
     end
 
